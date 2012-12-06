@@ -39,6 +39,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -83,6 +84,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_MyDatabase_1DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_MyDatabase_1DataSet.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="WarehouseEditor.resx">
       <DependentUpon>WarehouseEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,6 +118,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Warehouse.edmx.sqlce" />
     <None Include="WarehouseContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>WarehouseContext.Context.cs</LastGenOutput>
@@ -122,12 +129,26 @@
       <LastGenOutput>WarehouseContext.cs</LastGenOutput>
       <DependentUpon>Warehouse.edmx</DependentUpon>
     </None>
+    <None Include="_MyDatabase_1DataSet.xsc">
+      <DependentUpon>_MyDatabase_1DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="_MyDatabase_1DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_MyDatabase_1DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_MyDatabase_1DataSet.xss">
+      <DependentUpon>_MyDatabase_1DataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

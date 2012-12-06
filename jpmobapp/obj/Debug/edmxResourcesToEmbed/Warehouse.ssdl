@@ -19,7 +19,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" Nullable="false" />
-    <Property Name="Price" Type="nvarchar" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="SalesTeam">
     <Key>

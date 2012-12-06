@@ -24,7 +24,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" Nullable="false" />
-    <Property Name="Price" Type="nvarchar" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="SalesTeam">
     <Key>
@@ -88,7 +88,7 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" Unicode="true" />
-          <Property Type="String" Name="Price" Nullable="false" />
+          <Property Type="Double" Name="Price" Nullable="false" />
           <NavigationProperty Name="Sale" Relationship="Warehouse.ProductSale" FromRole="Product" ToRole="Sale" />
         </EntityType>
         <EntityType Name="Salesman">
