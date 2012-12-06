@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="ProductSet" EntityType="Model1.Store.ProductSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SalesmanSet" EntityType="Model1.Store.SalesmanSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SaleSet" EntityType="Model1.Store.SaleSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ProductSale" Association="Model1.Store.ProductSale">
+      <End Role="Product" EntitySet="ProductSet" />
+      <End Role="Sale" EntitySet="SaleSet" />
+    </AssociationSet>
+    <AssociationSet Name="SalesmanSale" Association="Model1.Store.SalesmanSale">
+      <End Role="Salesman" EntitySet="SalesmanSet" />
+      <End Role="Sale" EntitySet="SaleSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ProductSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
+    <Property Name="Price" Type="nvarchar" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalesmanSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SaleSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_Id" Type="int" Nullable="false" />
+    <Property Name="Salesman_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ProductSale">
+    <End Role="Product" Type="Model1.Store.ProductSet" Multiplicity="1" />
+    <End Role="Sale" Type="Model1.Store.SaleSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SalesmanSale">
+    <End Role="Salesman" Type="Model1.Store.SalesmanSet" Multiplicity="1" />
+    <End Role="Sale" Type="Model1.Store.SaleSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Salesman">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="Salesman_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

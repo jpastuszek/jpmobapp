@@ -1,1 +1,11 @@
 c:\users\kazuya\documents\visual studio 2012\Projects\jpmobapp\jpmobapp\bin\Debug\jpmobapp.exe.config
+C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\bin\Debug\jpmobapp.exe
+C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\bin\Debug\jpmobapp.pdb
+C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\bin\Debug\EntityFramework.dll
+C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\bin\Debug\EntityFramework.xml
+C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\obj\Debug\jpmobapp.csprojResolveAssemblyReference.cache
+C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\obj\Debug\jpmobapp.Properties.Resources.resources
+C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\obj\Debug\jpmobapp.csproj.GenerateResource.Cache
+C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\obj\Debug\jpmobapp.exe
+C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\obj\Debug\jpmobapp.pdb
+C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\obj\Debug\jpmobapp.WarehouseEditor.resources

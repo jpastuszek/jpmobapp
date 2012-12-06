@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Warehouse" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="WarehouseContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Products" EntityType="Warehouse.Product" />
+    <EntitySet Name="SalesTeam" EntityType="Warehouse.Salesman" />
+    <EntitySet Name="Sales" EntityType="Warehouse.Sale" />
+    <AssociationSet Name="ProductSale" Association="Warehouse.ProductSale">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Sale" EntitySet="Sales" />
+    </AssociationSet>
+    <AssociationSet Name="SalesmanSale" Association="Warehouse.SalesmanSale">
+      <End Role="Salesman" EntitySet="SalesTeam" />
+      <End Role="Sale" EntitySet="Sales" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" Unicode="true" />
+    <Property Type="String" Name="Price" Nullable="false" />
+    <NavigationProperty Name="Sale" Relationship="Warehouse.ProductSale" FromRole="Product" ToRole="Sale" />
+  </EntityType>
+  <EntityType Name="Salesman">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <NavigationProperty Name="Sale" Relationship="Warehouse.SalesmanSale" FromRole="Salesman" ToRole="Sale" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Product" Relationship="Warehouse.ProductSale" FromRole="Sale" ToRole="Product" />
+    <NavigationProperty Name="Salesman" Relationship="Warehouse.SalesmanSale" FromRole="Sale" ToRole="Salesman" />
+  </EntityType>
+  <Association Name="ProductSale">
+    <End Type="Warehouse.Product" Role="Product" Multiplicity="1" />
+    <End Type="Warehouse.Sale" Role="Sale" Multiplicity="*" />
+  </Association>
+  <Association Name="SalesmanSale">
+    <End Type="Warehouse.Salesman" Role="Salesman" Multiplicity="1" />
+    <End Type="Warehouse.Sale" Role="Sale" Multiplicity="*" />
+  </Association>
+</Schema>
