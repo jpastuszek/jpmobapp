@@ -51,24 +51,42 @@ namespace jpmobapp
 
         private void AddProduct_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("Adding product: " + ProductName.Text);
+            Debug.WriteLine("Adding product: " + ProductNameBox.Text);
+
+            var name = ProductNameBox.Text;
+            if (name.Length == 0)
+            {
+                MessageBox.Show("You must enter product name.", "Product Name Entry Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            var price = 0.0;
+            if (!Double.TryParse(ProductPriceBox.Text, out price))
+            {
+                MessageBox.Show("You must enter product price.", "Product Price Entry Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             using (var context = new WarehouseContext())
             {
-                var product = new Product { Name = ProductName.Text, Price = 0 };
+                var product = new Product { Name = name, Price = price };
                 context.Products.Add(product);
                 context.SaveChanges();
                 AddProductToList(product);
             }
+
+            ProductNameBox.Clear();
+            ProductPriceBox.Clear();
         }
 
         public void AddProductToList(Product product)
         {
-            ListViewItem item = new ListViewItem();
+            var item = new ListViewItem();
             item.Name = "Product";
             item.Tag = product.Id;
             item.Text = product.Id.ToString();
 
-            ListViewItem.ListViewSubItem subItem = new ListViewItem.ListViewSubItem(item, "Name");
+            var subItem = new ListViewItem.ListViewSubItem(item, "Name");
             subItem.Name = "Name";
             subItem.Text = product.Name;
             item.SubItems.Add(subItem);
@@ -86,7 +104,22 @@ namespace jpmobapp
 
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductEntryGroup_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
