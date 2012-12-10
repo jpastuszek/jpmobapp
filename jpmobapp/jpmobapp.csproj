@@ -53,33 +53,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Product.cs">
-      <DependentUpon>WarehouseContext.tt</DependentUpon>
+      <DependentUpon>WharehouseContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Sale.cs">
-      <DependentUpon>WarehouseContext.tt</DependentUpon>
+      <DependentUpon>WharehouseContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Salesman.cs">
-      <DependentUpon>WarehouseContext.tt</DependentUpon>
+      <DependentUpon>WharehouseContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Warehouse.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Warehouse.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="WarehouseContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WarehouseContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WarehouseContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WarehouseContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WarehouseDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WarehouseDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="WarehouseEditor.cs">
       <SubType>Form</SubType>
@@ -89,6 +74,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WharehouseContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WharehouseContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WharehouseContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WharehouseContext.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="WarehouseEditor.resx">
       <DependentUpon>WarehouseEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,26 +114,15 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Warehouse.edmx.sqlce" />
-    <None Include="WarehouseContext.Context.tt">
+    <None Include="WharehouseContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>WarehouseContext.Context.cs</LastGenOutput>
+      <LastGenOutput>WharehouseContext.Context.cs</LastGenOutput>
       <DependentUpon>Warehouse.edmx</DependentUpon>
     </None>
-    <None Include="WarehouseContext.tt">
+    <None Include="WharehouseContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>WarehouseContext.cs</LastGenOutput>
+      <LastGenOutput>WharehouseContext.cs</LastGenOutput>
       <DependentUpon>Warehouse.edmx</DependentUpon>
-    </None>
-    <None Include="WarehouseDataSet.xsc">
-      <DependentUpon>WarehouseDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="WarehouseDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>WarehouseDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="WarehouseDataSet.xss">
-      <DependentUpon>WarehouseDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

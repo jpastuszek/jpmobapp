@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 12/08/2012 12:06:38
--- Generated from EDMX file: C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\Warehouse.edmx
+-- Date Created: 12/10/2012 21:47:41
+-- Generated from EDMX file: C:\Users\kazuya\documents\visual studio 2012\Projects\jpmobapp\jpmobapp\Warehouse.edmx
 -- --------------------------------------------------
 
 
@@ -12,10 +12,6 @@
 -- NOTE: if the constraint does not exist, an ignorable error will be reported.
 -- --------------------------------------------------
 
-    ALTER TABLE [Sales] DROP CONSTRAINT [FK_ProductSale];
-GO
-    ALTER TABLE [Sales] DROP CONSTRAINT [FK_SalesmanSale];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -24,9 +20,9 @@ GO
 
     DROP TABLE [Products];
 GO
-    DROP TABLE [SalesTeam];
-GO
     DROP TABLE [Sales];
+GO
+    DROP TABLE [SalesTeam];
 GO
 
 -- --------------------------------------------------
@@ -38,14 +34,7 @@ CREATE TABLE [Products] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(4000)  NOT NULL,
     [Price] float  NOT NULL,
-    [ProducedQuantity] nvarchar(4000)  NOT NULL
-);
-GO
-
--- Creating table 'SalesTeam'
-CREATE TABLE [SalesTeam] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(4000)  NOT NULL
+    [ProducedQuantity] int  NOT NULL
 );
 GO
 
@@ -58,59 +47,38 @@ CREATE TABLE [Sales] (
 );
 GO
 
+-- Creating table 'SalesTeam'
+CREATE TABLE [SalesTeam] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(4000)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [Id] in table 'Products'
+-- Creating primary key on [Id], [Name], [Price], [ProducedQuantity] in table 'Products'
 ALTER TABLE [Products]
 ADD CONSTRAINT [PK_Products]
-    PRIMARY KEY ([Id] );
+    PRIMARY KEY ([Id], [Name], [Price], [ProducedQuantity] );
 GO
 
--- Creating primary key on [Id] in table 'SalesTeam'
-ALTER TABLE [SalesTeam]
-ADD CONSTRAINT [PK_SalesTeam]
-    PRIMARY KEY ([Id] );
-GO
-
--- Creating primary key on [Id] in table 'Sales'
+-- Creating primary key on [Id], [Quantity], [Product_Id], [Salesman_Id] in table 'Sales'
 ALTER TABLE [Sales]
 ADD CONSTRAINT [PK_Sales]
-    PRIMARY KEY ([Id] );
+    PRIMARY KEY ([Id], [Quantity], [Product_Id], [Salesman_Id] );
+GO
+
+-- Creating primary key on [Id], [Name] in table 'SalesTeam'
+ALTER TABLE [SalesTeam]
+ADD CONSTRAINT [PK_SalesTeam]
+    PRIMARY KEY ([Id], [Name] );
 GO
 
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [Product_Id] in table 'Sales'
-ALTER TABLE [Sales]
-ADD CONSTRAINT [FK_ProductSale]
-    FOREIGN KEY ([Product_Id])
-    REFERENCES [Products]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ProductSale'
-CREATE INDEX [IX_FK_ProductSale]
-ON [Sales]
-    ([Product_Id]);
-GO
-
--- Creating foreign key on [Salesman_Id] in table 'Sales'
-ALTER TABLE [Sales]
-ADD CONSTRAINT [FK_SalesmanSale]
-    FOREIGN KEY ([Salesman_Id])
-    REFERENCES [SalesTeam]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_SalesmanSale'
-CREATE INDEX [IX_FK_SalesmanSale]
-ON [Sales]
-    ([Salesman_Id]);
-GO
 
 -- --------------------------------------------------
 -- Script has ended

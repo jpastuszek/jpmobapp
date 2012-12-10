@@ -26,7 +26,7 @@ namespace jpmobapp
         }
     
         public DbSet<Product> Products { get; set; }
-        public DbSet<Salesman> SalesTeam { get; set; }
         public DbSet<Sale> Sales { get; set; }
+        public DbSet<Salesman> SalesTeam { get; set; }
     }
 }

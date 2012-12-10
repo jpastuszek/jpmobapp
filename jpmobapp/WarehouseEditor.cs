@@ -20,8 +20,6 @@ namespace jpmobapp
 
         private void WarehouseEditor_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the '_MyDatabase_1DataSet.Products' table. You can move, or remove it, as needed.
-            this.productsTableAdapter.Fill(this._MyDatabase_1DataSet.Products);
             RefreshProducts();
         }
 
@@ -69,7 +67,7 @@ namespace jpmobapp
 
             using (var context = new WarehouseContext())
             {
-                var product = new Product { Name = name, Price = price };
+                var product = new Product { Name = name, Price = price, ProducedQuantity = 1 };
                 context.Products.Add(product);
                 context.SaveChanges();
                 AddProductToList(product);
@@ -97,31 +95,6 @@ namespace jpmobapp
             item.SubItems.Add(subItem);
 
             ProductList.Items.Add(item);
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ProductEntryGroup_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ProductList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
