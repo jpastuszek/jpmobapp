@@ -26,11 +26,15 @@ namespace jpmobapp.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=\"C:\\Users\\kazuya\\Documents\\Visual Studio 2012\\Projects\\jpmobapp\\MyDat" +
-            "abase#1.sdf\";Persist Security Info=True")]
-        public string MyDatabase_1ConnectionString {
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=\"C:\\Users\\kazuya\\Documents\\Visual Studio 2012\\Projects\\jpmobapp\\Wareh" +
+            "ouse.sdf\";Persist Security Info=True")]
+        public string WarehouseConnectionString {
             get {
-                return ((string)(this["MyDatabase_1ConnectionString"]));
+                return ((string)(this["WarehouseConnectionString"]));
             }
         }
     }
