@@ -15,7 +15,7 @@
     <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
     <Property Type="Double" Name="Price" Nullable="false" />
-    <Property Type="Int32" Name="ProducedQuantity" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ProducedQuantity" Nullable="false" />
   </EntityType>
   <EntityType Name="Sale">
     <Key>

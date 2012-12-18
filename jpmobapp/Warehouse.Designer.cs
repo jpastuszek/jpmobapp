@@ -1,4 +1,4 @@
-﻿// Default code generation is disabled for model 'C:\Users\kazuya\documents\visual studio 2012\Projects\jpmobapp\jpmobapp\Warehouse.edmx'. 
+﻿// Default code generation is disabled for model 'C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\Warehouse.edmx'. 
 // To enable default code generation, change the value of the 'Code Generation Strategy' designer
 // property to an alternate value. This property is available in the Properties Window when the model is
 // open in the designer.

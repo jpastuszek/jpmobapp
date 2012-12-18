@@ -15,7 +15,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="4000" />
     <Property Name="Price" Type="float" Nullable="false" />
-    <Property Name="ProducedQuantity" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProducedQuantity" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Sales">
     <Key>
