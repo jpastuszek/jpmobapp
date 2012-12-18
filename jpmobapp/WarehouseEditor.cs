@@ -79,6 +79,8 @@ namespace jpmobapp
 
         public void AddProductToList(Product product)
         {
+            Debug.WriteLine("Adding product to list: " + product.Name);
+            
             var item = new ListViewItem();
             item.Name = "Product";
             item.Tag = product.Id;
@@ -95,6 +97,23 @@ namespace jpmobapp
             item.SubItems.Add(subItem);
 
             ProductList.Items.Add(item);
+        }
+
+        private void ProductList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ProductList.SelectedItems.Count > 0)
+            {
+                var item = ProductList.SelectedItems[ProductList.SelectedItems.Count - 1];
+                Debug.WriteLine("Secelcted product: " + item.ToString());
+                ProductNameBox.Text = item.SubItems[1].Text;
+                ProductPriceBox.Text = item.SubItems[2].Text;
+            }
+            else
+            {
+                Debug.WriteLine("Product selection cleared");
+                ProductNameBox.Text = "";
+                ProductPriceBox.Text = "";
+            }    
         }
     }
 }

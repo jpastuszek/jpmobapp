@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.ProductList = new System.Windows.Forms.ListView();
             this.ColumnId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -54,8 +53,6 @@
             this.ColumnPrice});
             this.ProductList.FullRowSelect = true;
             this.ProductList.GridLines = true;
-            this.ProductList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
             this.ProductList.Location = new System.Drawing.Point(12, 12);
             this.ProductList.Name = "ProductList";
             this.ProductList.Size = new System.Drawing.Size(305, 183);
@@ -63,6 +60,7 @@
             this.ProductList.TabIndex = 0;
             this.ProductList.UseCompatibleStateImageBehavior = false;
             this.ProductList.View = System.Windows.Forms.View.Details;
+            this.ProductList.SelectedIndexChanged += new System.EventHandler(this.ProductList_SelectedIndexChanged);
             // 
             // ColumnId
             // 
@@ -90,7 +88,7 @@
             this.AddProduct.Location = new System.Drawing.Point(179, 154);
             this.AddProduct.Name = "AddProduct";
             this.AddProduct.Size = new System.Drawing.Size(75, 23);
-            this.AddProduct.TabIndex = 2;
+            this.AddProduct.TabIndex = 10;
             this.AddProduct.Text = "Add";
             this.AddProduct.UseVisualStyleBackColor = true;
             this.AddProduct.Click += new System.EventHandler(this.AddProduct_Click);
@@ -100,7 +98,7 @@
             this.ProductPriceBox.Location = new System.Drawing.Point(46, 48);
             this.ProductPriceBox.Name = "ProductPriceBox";
             this.ProductPriceBox.Size = new System.Drawing.Size(90, 20);
-            this.ProductPriceBox.TabIndex = 4;
+            this.ProductPriceBox.TabIndex = 2;
             // 
             // label1
             // 
@@ -140,7 +138,7 @@
             this.SaveProduct.Location = new System.Drawing.Point(98, 154);
             this.SaveProduct.Name = "SaveProduct";
             this.SaveProduct.Size = new System.Drawing.Size(75, 23);
-            this.SaveProduct.TabIndex = 7;
+            this.SaveProduct.TabIndex = 11;
             this.SaveProduct.Text = "Save";
             this.SaveProduct.UseVisualStyleBackColor = true;
             // 
