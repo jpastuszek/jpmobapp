@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 jpmobapp\bin\*
 jpmobapp/bin/*
+=======
+jpmobapp/bin/*
+jpmobapp/obj/*
+>>>>>>> Aktualizacja plików ignorowanych
