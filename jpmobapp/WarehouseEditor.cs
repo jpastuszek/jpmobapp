@@ -21,6 +21,7 @@ namespace jpmobapp
         private void WarehouseEditor_Load(object sender, EventArgs e)
         {
             RefreshProducts();
+            RefreshSales();
         }
 
         public void RefreshProducts()
@@ -47,40 +48,10 @@ namespace jpmobapp
             }
         }
 
-        private void AddProduct_Click(object sender, EventArgs e)
-        {
-            Debug.WriteLine("Adding product: " + ProductNameBox.Text);
-
-            var name = ProductNameBox.Text;
-            if (name.Length == 0)
-            {
-                MessageBox.Show("You must enter product name.", "Product Name Entry Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            var price = 0.0;
-            if (!Double.TryParse(ProductPriceBox.Text, out price))
-            {
-                MessageBox.Show("You must enter product price.", "Product Price Entry Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            using (var context = new WarehouseContext())
-            {
-                var product = new Product { Name = name, Price = price, ProducedQuantity = 1 };
-                context.Products.Add(product);
-                context.SaveChanges();
-                AddProductToList(product);
-            }
-
-            ProductNameBox.Clear();
-            ProductPriceBox.Clear();
-        }
-
         public void AddProductToList(Product product)
         {
             Debug.WriteLine("Adding product to list: " + product.Name);
-            
+
             var item = new ListViewItem();
             item.Name = "Product";
             item.Tag = product.Id;
@@ -99,21 +70,111 @@ namespace jpmobapp
             ProductList.Items.Add(item);
         }
 
+        public void RefreshSales()
+        {
+            using (var context = new WarehouseContext())
+            {
+                Debug.WriteLine("Sales listing obtained");
+
+                var sales =
+                    from sale in context.Sales
+                    join product in context.Products on sale.Product_Id equals product.Id
+                    orderby product.Name
+                    select new
+                    {
+                        Id = sale.Id,
+                        Name = product.Name,
+                        Quantity = sale.Quantity
+                    };
+
+                Debug.WriteLine("Sale history listing obtained");
+                Debug.WriteLine("Found sales: " + sales.Count().ToString());
+
+                SaleHistory.Items.Clear();
+
+                foreach (var sale in sales)
+                {
+                    Debug.WriteLine(sale.Name);
+
+                    var item = new ListViewItem();
+                    item.Name = "Sale";
+                    item.Tag = sale.Id;
+                    item.Text = sale.Id.ToString();
+
+                    var subItem = new ListViewItem.ListViewSubItem(item, "Name");
+                    subItem.Name = "Name";
+                    subItem.Text = sale.Name;
+                    item.SubItems.Add(subItem);
+
+                    subItem = new ListViewItem.ListViewSubItem(item, "Quantity");
+                    subItem.Name = "Quantity";
+                    subItem.Text = sale.Quantity.ToString();
+                    item.SubItems.Add(subItem);
+
+                    SaleHistory.Items.Add(item);
+                }
+
+                Debug.WriteLine("Sale listing updated");
+            }
+        }
+        
         private void ProductList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ProductList.SelectedItems.Count > 0)
             {
                 var item = ProductList.SelectedItems[ProductList.SelectedItems.Count - 1];
                 Debug.WriteLine("Secelcted product: " + item.ToString());
-                ProductNameBox.Text = item.SubItems[1].Text;
-                ProductPriceBox.Text = item.SubItems[2].Text;
+                SaleProductName.Text = item.SubItems[1].Text;
+                SaleQuantity.Text = "1";
             }
             else
             {
                 Debug.WriteLine("Product selection cleared");
-                ProductNameBox.Text = "";
-                ProductPriceBox.Text = "";
-            }    
+                SaleProductName.Text = "";
+                SaleQuantity.Text = "";
+            }
+        }
+
+        private void Sale_Click(object sender, EventArgs e)
+        {
+            if (ProductList.SelectedItems.Count > 0)
+            {
+                var quantity = 0;
+                if (!Int32.TryParse(SaleQuantity.Text, out quantity))
+                {
+                    MessageBox.Show("Incorrect Quantity value. Not a number.", "Sale Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                if (quantity <= 0)
+                {
+                    MessageBox.Show("Incorrect Quantity value. Non positive numebr.", "Sale Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                var item = ProductList.SelectedItems[ProductList.SelectedItems.Count - 1];
+                var item_id = Int32.Parse(item.SubItems[0].Text);
+                Debug.WriteLine("Sale of product ID: " + item_id.ToString());
+
+                using (var context = new WarehouseContext())
+                {
+                    var product_to_sale =
+                    from product in context.Products
+                    where product.Id == item_id
+                    select product;
+
+                    var sale_item = new Sale { Product_Id = product_to_sale.First().Id, Quantity = quantity, Salesman_Id = 0 };
+                    context.Sales.Add(sale_item);
+                    context.SaveChanges();
+                }
+
+                RefreshSales();
+            }
+            else
+            {
+                Debug.WriteLine("No product selected");
+                MessageBox.Show("You must select product.", "Sale Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
         }
     }
 }
