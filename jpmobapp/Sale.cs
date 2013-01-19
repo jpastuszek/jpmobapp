@@ -16,7 +16,8 @@ namespace jpmobapp
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
-        public int Product_Id { get; set; }
-        public int Salesman_Id { get; set; }
+    
+        public virtual Product Product { get; set; }
+        public virtual Salesman Salesman { get; set; }
     }
 }

@@ -14,9 +14,16 @@ namespace jpmobapp
     
     public partial class Product
     {
+        public Product()
+        {
+            this.Sale = new HashSet<Sale>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public int AvailableQuantity { get; set; }
+    
+        public virtual ICollection<Sale> Sale { get; set; }
     }
 }

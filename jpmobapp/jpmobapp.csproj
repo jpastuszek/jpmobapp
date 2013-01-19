@@ -66,6 +66,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Warehouse.edmx</DependentUpon>
     </Compile>
+    <Compile Include="WarehouseDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WarehouseDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="WarehouseEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +119,17 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Warehouse.edmx.sqlce" />
+    <None Include="WarehouseDataSet.xsc">
+      <DependentUpon>WarehouseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="WarehouseDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WarehouseDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="WarehouseDataSet.xss">
+      <DependentUpon>WarehouseDataSet.xsd</DependentUpon>
+    </None>
     <None Include="WharehouseContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>WharehouseContext.Context.cs</LastGenOutput>

@@ -45,15 +45,12 @@ namespace jpmobapp
 
         }
 
-        public Int32 GetSalesmanId()      
+        public Salesman GetSalesman(WarehouseContext context)      
         {
             if (Salesman.SelectedItem != null)
             {
                 Debug.WriteLine("Selected sales man ID: " + Salesman.SelectedItem);
                 var name = Salesman.SelectedItem;
-
-                using (var context = new WarehouseContext())
-                {
                     var salesman =
                         from sales_team in context.SalesTeam
                         where sales_team.Name == name
@@ -62,15 +59,14 @@ namespace jpmobapp
                     if (salesman.Count() == 0)
                     {
                         Debug.WriteLine("No salesman found for name: " + name);
-                        return -1;
+                        return null;
                     }
 
-                    Debug.WriteLine("Found sales man: " + salesman.First().Id.ToString());
-                    return salesman.First().Id;
-                }
-
+                    Debug.WriteLine("Found sales man ID: " + salesman.First().Id.ToString());
+                    return salesman.First();
+ 
             }
-            return -1;
+            return null;
         }
 
         public void RefreshProducts()
@@ -120,16 +116,21 @@ namespace jpmobapp
 
         public void RefreshSales()
         {
-            var salesman_id = GetSalesmanId();
-
             using (var context = new WarehouseContext())
             {
+                var selected_salesman = GetSalesman(context);
+                if (selected_salesman == null)
+                {
+                    SaleHistory.Items.Clear();
+                    return;
+                }
+
                 Debug.WriteLine("Sales listing obtained");
 
                 var sales =
                     from sale in context.Sales
-                    join product in context.Products on sale.Product_Id equals product.Id
-                    where sale.Salesman_Id == salesman_id
+                    join product in context.Products on sale.Product.Id equals product.Id
+                    where sale.Salesman.Id == selected_salesman.Id
                     orderby sale.Id descending
                     select new
                     {
@@ -193,13 +194,6 @@ namespace jpmobapp
 
         private void Sale_Click(object sender, EventArgs e)
         {
-            var salesman_id = GetSalesmanId();
-            if (salesman_id < 0)
-            {
-                MessageBox.Show("Please select salesman first.", "Sale Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
             if (ProductList.SelectedItems.Count > 0)
             {
                 var quantity = 0;
@@ -220,6 +214,13 @@ namespace jpmobapp
 
                 using (var context = new WarehouseContext())
                 {
+                    var salesman = GetSalesman(context);
+                    if (salesman == null)
+                    {
+                        MessageBox.Show("Please select salesman first.", "Sale Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+
                     var product_to_sale =
                     from product in context.Products
                     where product.Id == item_id
@@ -231,7 +232,7 @@ namespace jpmobapp
                         return;
                     }
 
-                    var sale_item = new Sale { Product_Id = product_to_sale.First().Id, Quantity = quantity, Salesman_Id = salesman_id };
+                    var sale_item = new Sale { Product = product_to_sale.First(), Quantity = quantity, Salesman = salesman };
                     context.Sales.Add(sale_item);
 
                     product_to_sale.First().AvailableQuantity = product_to_sale.First().AvailableQuantity - quantity;

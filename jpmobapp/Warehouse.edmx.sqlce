@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 01/19/2013 16:47:40
+-- Date Created: 01/19/2013 17:52:18
 -- Generated from EDMX file: C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\Warehouse.edmx
 -- --------------------------------------------------
 
@@ -12,6 +12,10 @@
 -- NOTE: if the constraint does not exist, an ignorable error will be reported.
 -- --------------------------------------------------
 
+    ALTER TABLE [Sales] DROP CONSTRAINT [FK_ProductSale];
+GO
+    ALTER TABLE [Sales] DROP CONSTRAINT [FK_SalesmanSale];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -79,6 +83,34 @@ GO
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
+
+-- Creating foreign key on [Product_Id] in table 'Sales'
+ALTER TABLE [Sales]
+ADD CONSTRAINT [FK_ProductSale]
+    FOREIGN KEY ([Product_Id])
+    REFERENCES [Products]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProductSale'
+CREATE INDEX [IX_FK_ProductSale]
+ON [Sales]
+    ([Product_Id]);
+GO
+
+-- Creating foreign key on [Salesman_Id] in table 'Sales'
+ALTER TABLE [Sales]
+ADD CONSTRAINT [FK_SalesmanSale]
+    FOREIGN KEY ([Salesman_Id])
+    REFERENCES [SalesTeam]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SalesmanSale'
+CREATE INDEX [IX_FK_SalesmanSale]
+ON [Sales]
+    ([Salesman_Id]);
+GO
 
 -- --------------------------------------------------
 -- Script has ended
