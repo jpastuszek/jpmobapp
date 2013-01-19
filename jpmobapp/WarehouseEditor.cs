@@ -20,16 +20,63 @@ namespace jpmobapp
 
         private void WarehouseEditor_Load(object sender, EventArgs e)
         {
+            RefreshSalesTeam();
             RefreshProducts();
             RefreshSales();
+        }
+
+        public void RefreshSalesTeam()
+        {
+            using (var context = new WarehouseContext())
+            {
+                var salesmans =
+                    from sales_team in context.SalesTeam
+                    orderby sales_team.Name
+                    select sales_team;
+
+                Debug.WriteLine("Found sales mans: " + salesmans.Count().ToString());
+                Salesman.Items.Clear();
+
+                foreach (var salesman in salesmans)
+                {
+                    Salesman.Items.Add(salesman.Name);
+                }
+            }
+
+        }
+
+        public Int32 GetSalesmanId()      
+        {
+            if (Salesman.SelectedItem != null)
+            {
+                Debug.WriteLine("Selected sales man ID: " + Salesman.SelectedItem);
+                var name = Salesman.SelectedItem;
+
+                using (var context = new WarehouseContext())
+                {
+                    var salesman =
+                        from sales_team in context.SalesTeam
+                        where sales_team.Name == name
+                        select sales_team;
+
+                    if (salesman.Count() == 0)
+                    {
+                        Debug.WriteLine("No salesman found for name: " + name);
+                        return -1;
+                    }
+
+                    Debug.WriteLine("Found sales man: " + salesman.First().Id.ToString());
+                    return salesman.First().Id;
+                }
+
+            }
+            return -1;
         }
 
         public void RefreshProducts()
         {
             using (var context = new WarehouseContext())
             {
-                Debug.WriteLine("Products listing obtained");
-
                 var products =
                     from product in context.Products
                     orderby product.Name
@@ -73,6 +120,8 @@ namespace jpmobapp
 
         public void RefreshSales()
         {
+            var salesman_id = GetSalesmanId();
+
             using (var context = new WarehouseContext())
             {
                 Debug.WriteLine("Sales listing obtained");
@@ -80,6 +129,7 @@ namespace jpmobapp
                 var sales =
                     from sale in context.Sales
                     join product in context.Products on sale.Product_Id equals product.Id
+                    where sale.Salesman_Id == salesman_id
                     orderby sale.Id descending
                     select new
                     {
@@ -118,6 +168,11 @@ namespace jpmobapp
                 Debug.WriteLine("Sale listing updated");
             }
         }
+
+        private void Salesman_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshSales();
+        }
         
         private void ProductList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -138,6 +193,13 @@ namespace jpmobapp
 
         private void Sale_Click(object sender, EventArgs e)
         {
+            var salesman_id = GetSalesmanId();
+            if (salesman_id < 0)
+            {
+                MessageBox.Show("Please select salesman first.", "Sale Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             if (ProductList.SelectedItems.Count > 0)
             {
                 var quantity = 0;
@@ -169,7 +231,7 @@ namespace jpmobapp
                         return;
                     }
 
-                    var sale_item = new Sale { Product_Id = product_to_sale.First().Id, Quantity = quantity, Salesman_Id = 0 };
+                    var sale_item = new Sale { Product_Id = product_to_sale.First().Id, Quantity = quantity, Salesman_Id = salesman_id };
                     context.Sales.Add(sale_item);
 
                     product_to_sale.First().AvailableQuantity = product_to_sale.First().AvailableQuantity - quantity;
@@ -190,6 +252,7 @@ namespace jpmobapp
                 return;
             }
         }
+
     }
 }
     

@@ -45,6 +45,8 @@
             this.ColumnSaleId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnSaleName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnSaleQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label3 = new System.Windows.Forms.Label();
+            this.Salesman = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
             this.SaleEntryGroup.SuspendLayout();
             this.SuspendLayout();
@@ -58,7 +60,7 @@
             this.ColumnAvailableQuantity});
             this.ProductList.FullRowSelect = true;
             this.ProductList.GridLines = true;
-            this.ProductList.Location = new System.Drawing.Point(12, 12);
+            this.ProductList.Location = new System.Drawing.Point(12, 37);
             this.ProductList.Name = "ProductList";
             this.ProductList.Size = new System.Drawing.Size(305, 183);
             this.ProductList.Sorting = System.Windows.Forms.SortOrder.Ascending;
@@ -126,7 +128,7 @@
             this.SaleEntryGroup.Controls.Add(this.label1);
             this.SaleEntryGroup.Controls.Add(this.SaleQuantity);
             this.SaleEntryGroup.Controls.Add(this.SaleProductName);
-            this.SaleEntryGroup.Location = new System.Drawing.Point(12, 201);
+            this.SaleEntryGroup.Location = new System.Drawing.Point(12, 226);
             this.SaleEntryGroup.Name = "SaleEntryGroup";
             this.SaleEntryGroup.Size = new System.Drawing.Size(305, 80);
             this.SaleEntryGroup.TabIndex = 7;
@@ -151,7 +153,7 @@
             this.ColumnSaleQuantity});
             this.SaleHistory.FullRowSelect = true;
             this.SaleHistory.GridLines = true;
-            this.SaleHistory.Location = new System.Drawing.Point(12, 287);
+            this.SaleHistory.Location = new System.Drawing.Point(12, 312);
             this.SaleHistory.Name = "SaleHistory";
             this.SaleHistory.Size = new System.Drawing.Size(305, 153);
             this.SaleHistory.TabIndex = 8;
@@ -173,11 +175,31 @@
             this.ColumnSaleQuantity.Text = "Quantity";
             this.ColumnSaleQuantity.Width = 58;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Salesman";
+            // 
+            // Salesman
+            // 
+            this.Salesman.FormattingEnabled = true;
+            this.Salesman.Location = new System.Drawing.Point(73, 10);
+            this.Salesman.Name = "Salesman";
+            this.Salesman.Size = new System.Drawing.Size(244, 21);
+            this.Salesman.TabIndex = 10;
+            this.Salesman.SelectedIndexChanged += new System.EventHandler(this.Salesman_SelectedIndexChanged);
+            // 
             // WarehouseEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(329, 452);
+            this.Controls.Add(this.Salesman);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.SaleHistory);
             this.Controls.Add(this.SaleEntryGroup);
             this.Controls.Add(this.ProductList);
@@ -188,6 +210,7 @@
             this.SaleEntryGroup.ResumeLayout(false);
             this.SaleEntryGroup.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -209,6 +232,8 @@
         private System.Windows.Forms.ColumnHeader ColumnSaleName;
         private System.Windows.Forms.ColumnHeader ColumnSaleQuantity;
         private System.Windows.Forms.ColumnHeader ColumnAvailableQuantity;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox Salesman;
     }
 }
 
