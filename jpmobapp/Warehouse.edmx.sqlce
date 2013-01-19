@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 01/16/2013 18:27:22
+-- Date Created: 01/19/2013 16:47:40
 -- Generated from EDMX file: C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\Warehouse.edmx
 -- --------------------------------------------------
 
@@ -34,7 +34,7 @@ CREATE TABLE [Products] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(4000)  NOT NULL,
     [Price] float  NOT NULL,
-    [ProducedQuantity] int  NOT NULL
+    [AvailableQuantity] int  NOT NULL
 );
 GO
 
@@ -58,22 +58,22 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [Id], [Name], [Price], [ProducedQuantity] in table 'Products'
+-- Creating primary key on [Id] in table 'Products'
 ALTER TABLE [Products]
 ADD CONSTRAINT [PK_Products]
-    PRIMARY KEY ([Id], [Name], [Price], [ProducedQuantity] );
+    PRIMARY KEY ([Id] );
 GO
 
--- Creating primary key on [Id], [Quantity], [Product_Id], [Salesman_Id] in table 'Sales'
+-- Creating primary key on [Id] in table 'Sales'
 ALTER TABLE [Sales]
 ADD CONSTRAINT [PK_Sales]
-    PRIMARY KEY ([Id], [Quantity], [Product_Id], [Salesman_Id] );
+    PRIMARY KEY ([Id] );
 GO
 
--- Creating primary key on [Id], [Name] in table 'SalesTeam'
+-- Creating primary key on [Id] in table 'SalesTeam'
 ALTER TABLE [SalesTeam]
 ADD CONSTRAINT [PK_SalesTeam]
-    PRIMARY KEY ([Id], [Name] );
+    PRIMARY KEY ([Id] );
 GO
 
 -- --------------------------------------------------

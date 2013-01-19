@@ -38,36 +38,37 @@ namespace jpmobapp
                 Debug.WriteLine("Products listing obtained");
                 Debug.WriteLine("Found products: " + products.Count().ToString());
 
+                ProductList.Items.Clear();
+
                 foreach (var product in products)
                 {
                     Debug.WriteLine(product.Name);
-                    AddProductToList(product);
+
+                    var item = new ListViewItem();
+                    item.Name = "Product";
+                    item.Tag = product.Id;
+                    item.Text = product.Id.ToString();
+
+                    var subItem = new ListViewItem.ListViewSubItem(item, "Name");
+                    subItem.Name = "Name";
+                    subItem.Text = product.Name;
+                    item.SubItems.Add(subItem);
+
+                    subItem = new ListViewItem.ListViewSubItem(item, "Price");
+                    subItem.Name = "Price";
+                    subItem.Text = product.Price.ToString();
+                    item.SubItems.Add(subItem);
+
+                    subItem = new ListViewItem.ListViewSubItem(item, "Available Quantity");
+                    subItem.Name = "Available Quantity";
+                    subItem.Text = product.AvailableQuantity.ToString();
+                    item.SubItems.Add(subItem);
+
+                    ProductList.Items.Add(item);
                 }
 
                 Debug.WriteLine("Products listing updated");
             }
-        }
-
-        public void AddProductToList(Product product)
-        {
-            Debug.WriteLine("Adding product to list: " + product.Name);
-
-            var item = new ListViewItem();
-            item.Name = "Product";
-            item.Tag = product.Id;
-            item.Text = product.Id.ToString();
-
-            var subItem = new ListViewItem.ListViewSubItem(item, "Name");
-            subItem.Name = "Name";
-            subItem.Text = product.Name;
-            item.SubItems.Add(subItem);
-
-            subItem = new ListViewItem.ListViewSubItem(item, "Price");
-            subItem.Name = "Price";
-            subItem.Text = product.Price.ToString();
-            item.SubItems.Add(subItem);
-
-            ProductList.Items.Add(item);
         }
 
         public void RefreshSales()
@@ -79,7 +80,7 @@ namespace jpmobapp
                 var sales =
                     from sale in context.Sales
                     join product in context.Products on sale.Product_Id equals product.Id
-                    orderby product.Name
+                    orderby sale.Id descending
                     select new
                     {
                         Id = sale.Id,
@@ -162,12 +163,25 @@ namespace jpmobapp
                     where product.Id == item_id
                     select product;
 
+                    if (product_to_sale.First().AvailableQuantity < quantity)
+                    {
+                        MessageBox.Show("Incorrect Quantity value. Not enough available items left.", "Sale Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+
                     var sale_item = new Sale { Product_Id = product_to_sale.First().Id, Quantity = quantity, Salesman_Id = 0 };
                     context.Sales.Add(sale_item);
+
+                    product_to_sale.First().AvailableQuantity = product_to_sale.First().AvailableQuantity - quantity;
+
                     context.SaveChanges();
                 }
 
+                SaleProductName.Text = "";
+                SaleQuantity.Text = "";
+
                 RefreshSales();
+                RefreshProducts();
             }
             else
             {

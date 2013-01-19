@@ -33,6 +33,7 @@
             this.ColumnProductId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnProductName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnProductPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnAvailableQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SaleProductName = new System.Windows.Forms.TextBox();
             this.productsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.SaleQuantity = new System.Windows.Forms.TextBox();
@@ -53,7 +54,8 @@
             this.ProductList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnProductId,
             this.ColumnProductName,
-            this.ColumnProductPrice});
+            this.ColumnProductPrice,
+            this.ColumnAvailableQuantity});
             this.ProductList.FullRowSelect = true;
             this.ProductList.GridLines = true;
             this.ProductList.Location = new System.Drawing.Point(12, 12);
@@ -68,16 +70,21 @@
             // ColumnProductId
             // 
             this.ColumnProductId.Text = "Id";
+            this.ColumnProductId.Width = 33;
             // 
             // ColumnProductName
             // 
             this.ColumnProductName.Text = "Name";
-            this.ColumnProductName.Width = 162;
+            this.ColumnProductName.Width = 147;
             // 
             // ColumnProductPrice
             // 
             this.ColumnProductPrice.Text = "Price";
             this.ColumnProductPrice.Width = 58;
+            // 
+            // ColumnAvailableQuantity
+            // 
+            this.ColumnAvailableQuantity.Text = "Available Quantity";
             // 
             // SaleProductName
             // 
@@ -106,7 +113,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 51);
+            this.label2.Location = new System.Drawing.Point(5, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 6;
@@ -147,7 +154,6 @@
             this.SaleHistory.Location = new System.Drawing.Point(12, 287);
             this.SaleHistory.Name = "SaleHistory";
             this.SaleHistory.Size = new System.Drawing.Size(305, 153);
-            this.SaleHistory.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.SaleHistory.TabIndex = 8;
             this.SaleHistory.UseCompatibleStateImageBehavior = false;
             this.SaleHistory.View = System.Windows.Forms.View.Details;
@@ -155,6 +161,7 @@
             // ColumnSaleId
             // 
             this.ColumnSaleId.Text = "Id";
+            this.ColumnSaleId.Width = 33;
             // 
             // ColumnSaleName
             // 
@@ -201,6 +208,7 @@
         private System.Windows.Forms.ColumnHeader ColumnSaleId;
         private System.Windows.Forms.ColumnHeader ColumnSaleName;
         private System.Windows.Forms.ColumnHeader ColumnSaleQuantity;
+        private System.Windows.Forms.ColumnHeader ColumnAvailableQuantity;
     }
 }
 
