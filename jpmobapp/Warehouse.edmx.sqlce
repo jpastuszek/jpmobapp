@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 01/19/2013 17:52:18
+-- Date Created: 01/25/2013 18:22:50
 -- Generated from EDMX file: C:\Users\kazuya\Documents\Visual Studio 2012\Projects\jpmobapp\jpmobapp\Warehouse.edmx
 -- --------------------------------------------------
 
@@ -38,7 +38,8 @@ CREATE TABLE [Products] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(4000)  NOT NULL,
     [Price] float  NOT NULL,
-    [AvailableQuantity] int  NOT NULL
+    [AvailableQuantity] int  NOT NULL,
+    [Description] nvarchar(4000)  NOT NULL
 );
 GO
 
@@ -46,6 +47,7 @@ GO
 CREATE TABLE [Sales] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Quantity] int  NOT NULL,
+    [Date] datetime  NOT NULL,
     [Product_Id] int  NOT NULL,
     [Salesman_Id] int  NOT NULL
 );

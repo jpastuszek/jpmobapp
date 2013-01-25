@@ -47,6 +47,8 @@
             this.ColumnSaleQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.Salesman = new System.Windows.Forms.ComboBox();
+            this.ColumnSaleDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnProductDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
             this.SaleEntryGroup.SuspendLayout();
             this.SuspendLayout();
@@ -57,12 +59,13 @@
             this.ColumnProductId,
             this.ColumnProductName,
             this.ColumnProductPrice,
-            this.ColumnAvailableQuantity});
+            this.ColumnAvailableQuantity,
+            this.ColumnProductDescription});
             this.ProductList.FullRowSelect = true;
             this.ProductList.GridLines = true;
             this.ProductList.Location = new System.Drawing.Point(12, 37);
             this.ProductList.Name = "ProductList";
-            this.ProductList.Size = new System.Drawing.Size(305, 183);
+            this.ProductList.Size = new System.Drawing.Size(362, 183);
             this.ProductList.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.ProductList.TabIndex = 0;
             this.ProductList.UseCompatibleStateImageBehavior = false;
@@ -77,7 +80,7 @@
             // ColumnProductName
             // 
             this.ColumnProductName.Text = "Name";
-            this.ColumnProductName.Width = 147;
+            this.ColumnProductName.Width = 71;
             // 
             // ColumnProductPrice
             // 
@@ -87,13 +90,14 @@
             // ColumnAvailableQuantity
             // 
             this.ColumnAvailableQuantity.Text = "Available Quantity";
+            this.ColumnAvailableQuantity.Width = 74;
             // 
             // SaleProductName
             // 
             this.SaleProductName.Location = new System.Drawing.Point(61, 22);
             this.SaleProductName.Name = "SaleProductName";
             this.SaleProductName.ReadOnly = true;
-            this.SaleProductName.Size = new System.Drawing.Size(193, 20);
+            this.SaleProductName.Size = new System.Drawing.Size(295, 20);
             this.SaleProductName.TabIndex = 1;
             // 
             // SaleQuantity
@@ -130,14 +134,14 @@
             this.SaleEntryGroup.Controls.Add(this.SaleProductName);
             this.SaleEntryGroup.Location = new System.Drawing.Point(12, 226);
             this.SaleEntryGroup.Name = "SaleEntryGroup";
-            this.SaleEntryGroup.Size = new System.Drawing.Size(305, 80);
+            this.SaleEntryGroup.Size = new System.Drawing.Size(362, 80);
             this.SaleEntryGroup.TabIndex = 7;
             this.SaleEntryGroup.TabStop = false;
             this.SaleEntryGroup.Text = "Sale";
             // 
             // Sale
             // 
-            this.Sale.Location = new System.Drawing.Point(179, 46);
+            this.Sale.Location = new System.Drawing.Point(281, 46);
             this.Sale.Name = "Sale";
             this.Sale.Size = new System.Drawing.Size(75, 23);
             this.Sale.TabIndex = 11;
@@ -150,12 +154,13 @@
             this.SaleHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnSaleId,
             this.ColumnSaleName,
-            this.ColumnSaleQuantity});
+            this.ColumnSaleQuantity,
+            this.ColumnSaleDate});
             this.SaleHistory.FullRowSelect = true;
             this.SaleHistory.GridLines = true;
             this.SaleHistory.Location = new System.Drawing.Point(12, 312);
             this.SaleHistory.Name = "SaleHistory";
-            this.SaleHistory.Size = new System.Drawing.Size(305, 153);
+            this.SaleHistory.Size = new System.Drawing.Size(362, 128);
             this.SaleHistory.TabIndex = 8;
             this.SaleHistory.UseCompatibleStateImageBehavior = false;
             this.SaleHistory.View = System.Windows.Forms.View.Details;
@@ -168,7 +173,7 @@
             // ColumnSaleName
             // 
             this.ColumnSaleName.Text = "Name";
-            this.ColumnSaleName.Width = 162;
+            this.ColumnSaleName.Width = 81;
             // 
             // ColumnSaleQuantity
             // 
@@ -193,11 +198,20 @@
             this.Salesman.TabIndex = 10;
             this.Salesman.SelectedIndexChanged += new System.EventHandler(this.Salesman_SelectedIndexChanged);
             // 
+            // ColumnSaleDate
+            // 
+            this.ColumnSaleDate.Text = "Date";
+            this.ColumnSaleDate.Width = 121;
+            // 
+            // ColumnProductDescription
+            // 
+            this.ColumnProductDescription.Text = "Description";
+            // 
             // WarehouseEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 452);
+            this.ClientSize = new System.Drawing.Size(386, 452);
             this.Controls.Add(this.Salesman);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.SaleHistory);
@@ -234,6 +248,8 @@
         private System.Windows.Forms.ColumnHeader ColumnAvailableQuantity;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox Salesman;
+        private System.Windows.Forms.ColumnHeader ColumnSaleDate;
+        private System.Windows.Forms.ColumnHeader ColumnProductDescription;
     }
 }
 

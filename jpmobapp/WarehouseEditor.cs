@@ -107,6 +107,11 @@ namespace jpmobapp
                     subItem.Text = product.AvailableQuantity.ToString();
                     item.SubItems.Add(subItem);
 
+                    subItem = new ListViewItem.ListViewSubItem(item, "Description");
+                    subItem.Name = "Available Quantity";
+                    subItem.Text = product.Description.ToString();
+                    item.SubItems.Add(subItem);
+
                     ProductList.Items.Add(item);
                 }
 
@@ -136,7 +141,8 @@ namespace jpmobapp
                     {
                         Id = sale.Id,
                         Name = product.Name,
-                        Quantity = sale.Quantity
+                        Quantity = sale.Quantity,
+                        Date = sale.Date
                     };
 
                 Debug.WriteLine("Sale history listing obtained");
@@ -161,6 +167,11 @@ namespace jpmobapp
                     subItem = new ListViewItem.ListViewSubItem(item, "Quantity");
                     subItem.Name = "Quantity";
                     subItem.Text = sale.Quantity.ToString();
+                    item.SubItems.Add(subItem);
+
+                    subItem = new ListViewItem.ListViewSubItem(item, "Date");
+                    subItem.Name = "Date";
+                    subItem.Text = sale.Date.ToString();
                     item.SubItems.Add(subItem);
 
                     SaleHistory.Items.Add(item);
@@ -232,7 +243,7 @@ namespace jpmobapp
                         return;
                     }
 
-                    var sale_item = new Sale { Product = product_to_sale.First(), Quantity = quantity, Salesman = salesman };
+                    var sale_item = new Sale { Product = product_to_sale.First(), Quantity = quantity, Salesman = salesman, Date = DateTime.Now };
                     context.Sales.Add(sale_item);
 
                     product_to_sale.First().AvailableQuantity = product_to_sale.First().AvailableQuantity - quantity;
