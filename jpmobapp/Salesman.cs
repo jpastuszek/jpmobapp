@@ -21,6 +21,7 @@ namespace jpmobapp
     
         public int Id { get; set; }
         public string Name { get; set; }
+        public int WarehouseId { get; set; }
     
         public virtual ICollection<Sale> Sale { get; set; }
     }

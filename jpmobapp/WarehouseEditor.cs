@@ -288,7 +288,7 @@ namespace jpmobapp
 
                 foreach (var sale in sales) 
                 {
-                    this.saleTableAdapter.Insert(sale.Product.WarehouseId, sale.Salesman.Id, sale.Date, sale.Quantity);
+                    this.saleTableAdapter.Insert(sale.Product.WarehouseId, sale.Salesman.WarehouseId, sale.Date, sale.Quantity);
                     context.Sales.Remove(sale);
                 }
 
@@ -324,16 +324,20 @@ namespace jpmobapp
                 }
                 context.SaveChanges();
 
-                //foreach (var salesman in this.salesmanTableAdapter.GetData())
-                //{
-                //    var localSalesman = new Salesman
-                //    {
-                //        Name = salesman.Name
-                //    };
-                //}
+                foreach (var salesman in this.salesmanTableAdapter.GetData())
+                {
+                    var localSalesman = new Salesman
+                    {
+                        Name = salesman.Name,
+                        WarehouseId = salesman.Id
+                    };
+                    context.SalesTeam.Add(localSalesman);
+                }
+                context.SaveChanges();
             }
             RefreshSales();
             RefreshProducts();
+            RefreshSalesTeam();
         }
 
     }
