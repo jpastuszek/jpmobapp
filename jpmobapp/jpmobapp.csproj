@@ -11,6 +11,21 @@
     <AssemblyName>jpmobapp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -52,19 +67,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MagazynioDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MagazynioDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
-      <DependentUpon>WharehouseContext.tt</DependentUpon>
+      <DependentUpon>WarehouseContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Sale.cs">
-      <DependentUpon>WharehouseContext.tt</DependentUpon>
+      <DependentUpon>WarehouseContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Salesman.cs">
-      <DependentUpon>WharehouseContext.tt</DependentUpon>
+      <DependentUpon>WarehouseContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Warehouse.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Warehouse.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WarehouseContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WarehouseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseDataSet.cs">
+      <DependentUpon>WarehouseDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="WarehouseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -79,16 +113,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WharehouseContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WharehouseContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WharehouseContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WharehouseContext.tt</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="WarehouseEditor.resx">
       <DependentUpon>WarehouseEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,11 +124,23 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EntityDeploy Include="Warehouse.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Warehouse.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="MagazynioDataSet.xsc">
+      <DependentUpon>MagazynioDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MagazynioDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MagazynioDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MagazynioDataSet.xss">
+      <DependentUpon>MagazynioDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Warehouse.edmx.diagram">
       <DependentUpon>Warehouse.edmx</DependentUpon>
     </None>
@@ -119,6 +155,16 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Warehouse.edmx.sqlce" />
+    <None Include="WarehouseContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WarehouseContext.Context.cs</LastGenOutput>
+      <DependentUpon>Warehouse.edmx</DependentUpon>
+    </None>
+    <None Include="WarehouseContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WarehouseContext.cs</LastGenOutput>
+      <DependentUpon>Warehouse.edmx</DependentUpon>
+    </None>
     <None Include="WarehouseDataSet.xsc">
       <DependentUpon>WarehouseDataSet.xsd</DependentUpon>
     </None>
@@ -130,16 +176,6 @@
     <None Include="WarehouseDataSet.xss">
       <DependentUpon>WarehouseDataSet.xsd</DependentUpon>
     </None>
-    <None Include="WharehouseContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>WharehouseContext.Context.cs</LastGenOutput>
-      <DependentUpon>Warehouse.edmx</DependentUpon>
-    </None>
-    <None Include="WharehouseContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>WharehouseContext.cs</LastGenOutput>
-      <DependentUpon>Warehouse.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -149,6 +185,26 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1358455773_arrow_circle_double.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -26,11 +26,22 @@ namespace jpmobapp.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=\"C:\\Users\\kazuya\\Documents\\Visual Studio 2012\\Projects\\jpmobapp\\Wareh" +
-            "ouse.sdf\";Persist Security Info=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=\"c:\\Users\\adrianp\\Documents\\GitHub\\jpmobapp\\Warehouse.sdf\";Persist Se" +
+            "curity Info=True")]
         public string WarehouseConnectionString {
             get {
                 return ((string)(this["WarehouseConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=OL-SDC-PIOTROWI\\SQLEXPRESS;Initial Catalog=Magazynio;Integrated Secur" +
+            "ity=True")]
+        public string MagazynioConnectionString {
+            get {
+                return ((string)(this["MagazynioConnectionString"]));
             }
         }
     }

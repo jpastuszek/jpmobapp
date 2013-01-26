@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 namespace jpmobapp
 {
@@ -20,6 +21,15 @@ namespace jpmobapp
 
         private void WarehouseEditor_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'magazynioDataSet1.Salesman' table. You can move, or remove it, as needed.
+            this.salesmanTableAdapter.Fill(this.magazynioDataSet1.Salesman);
+            // TODO: This line of code loads data into the 'magazynioDataSet.Sale' table. You can move, or remove it, as needed.
+            this.saleTableAdapter.Fill(this.magazynioDataSet.Sale);
+            // TODO: This line of code loads data into the 'magazynioDataSet.Product' table. You can move, or remove it, as needed.
+            this.productTableAdapter.Fill(this.magazynioDataSet.Product);
+            var fileName = Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), "jpmobapp\\Warehouse.sdf");
+            Debug.WriteLine("DB is @: " + fileName);
             RefreshSalesTeam();
             RefreshProducts();
             RefreshSales();
@@ -45,26 +55,26 @@ namespace jpmobapp
 
         }
 
-        public Salesman GetSalesman(WarehouseContext context)      
+        public Salesman GetSalesman(WarehouseContext context)
         {
             if (Salesman.SelectedItem != null)
             {
                 Debug.WriteLine("Selected sales man ID: " + Salesman.SelectedItem);
                 var name = Salesman.SelectedItem;
-                    var salesman =
-                        from sales_team in context.SalesTeam
-                        where sales_team.Name == name
-                        select sales_team;
+                var salesman =
+                    from sales_team in context.SalesTeam
+                    where sales_team.Name == name
+                    select sales_team;
 
-                    if (salesman.Count() == 0)
-                    {
-                        Debug.WriteLine("No salesman found for name: " + name);
-                        return null;
-                    }
+                if (salesman.Count() == 0)
+                {
+                    Debug.WriteLine("No salesman found for name: " + name);
+                    return null;
+                }
 
-                    Debug.WriteLine("Found sales man ID: " + salesman.First().Id.ToString());
-                    return salesman.First();
- 
+                Debug.WriteLine("Found sales man ID: " + salesman.First().Id.ToString());
+                return salesman.First();
+
             }
             return null;
         }
@@ -185,7 +195,7 @@ namespace jpmobapp
         {
             RefreshSales();
         }
-        
+
         private void ProductList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ProductList.SelectedItems.Count > 0)
@@ -265,6 +275,49 @@ namespace jpmobapp
             }
         }
 
+        private void SyncButton_Click(object sender, EventArgs e)
+        {
+            using (var context = new WarehouseContext())
+            {
+                var sales =
+                    from sale in context.Sales
+                    orderby sale.Id descending
+                    select sale;
+
+                foreach (var sale in sales) 
+                {
+                //    this.saleTableAdapter.Insert(sale.Product.Id, sale.Salesman.Id, sale.Date, sale.Quantity);
+                    context.Sales.Remove(sale);
+                }
+
+                context.SaveChanges();
+
+                var products = from product in context.Products select product;
+                foreach (var product in products)
+                {
+                    context.Products.Remove(product);
+                }
+                context.SaveChanges();
+
+                foreach (var product in this.productTableAdapter.GetData())
+                {
+                    Debug.WriteLine(product.ToString());
+                    var localProduct = new Product
+                    {
+                        Name = product.Name,
+                        Price = product.Price,
+                        Description = product.Description,
+                        AvailableQuantity = 100,
+                        WarehouseId = product.Id
+                    };
+                    context.Products.Add(localProduct);
+                }
+                context.SaveChanges();
+
+            }
+            RefreshSales();
+            RefreshProducts();
+        }
+
     }
 }
-    
