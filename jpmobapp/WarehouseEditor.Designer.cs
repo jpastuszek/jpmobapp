@@ -61,6 +61,8 @@
             this.magazynioDataSet1 = new jpmobapp.MagazynioDataSet();
             this.salesmanBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.salesmanTableAdapter = new jpmobapp.MagazynioDataSetTableAdapters.SalesmanTableAdapter();
+            this.productsSaledProducedAvailableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.productsSaledProducedAvailableTableAdapter = new jpmobapp.MagazynioDataSetTableAdapters.ProductsSaledProducedAvailableTableAdapter();
             this.SaleEntryGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -71,6 +73,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.saleBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.magazynioDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.salesmanBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productsSaledProducedAvailableBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // ProductList
@@ -310,6 +313,15 @@
             // 
             this.salesmanTableAdapter.ClearBeforeFill = true;
             // 
+            // productsSaledProducedAvailableBindingSource
+            // 
+            this.productsSaledProducedAvailableBindingSource.DataMember = "ProductsSaledProducedAvailable";
+            this.productsSaledProducedAvailableBindingSource.DataSource = this.magazynioDataSet;
+            // 
+            // productsSaledProducedAvailableTableAdapter
+            // 
+            this.productsSaledProducedAvailableTableAdapter.ClearBeforeFill = true;
+            // 
             // WarehouseEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -331,6 +343,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.saleBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.magazynioDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.salesmanBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productsSaledProducedAvailableBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -369,6 +382,8 @@
         private MagazynioDataSet magazynioDataSet1;
         private System.Windows.Forms.BindingSource salesmanBindingSource;
         private MagazynioDataSetTableAdapters.SalesmanTableAdapter salesmanTableAdapter;
+        private System.Windows.Forms.BindingSource productsSaledProducedAvailableBindingSource;
+        private MagazynioDataSetTableAdapters.ProductsSaledProducedAvailableTableAdapter productsSaledProducedAvailableTableAdapter;
     }
 }
 

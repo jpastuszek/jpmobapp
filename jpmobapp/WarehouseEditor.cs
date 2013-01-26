@@ -21,6 +21,8 @@ namespace jpmobapp
 
         private void WarehouseEditor_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'magazynioDataSet.ProductsSaledProducedAvailable' table. You can move, or remove it, as needed.
+            this.productsSaledProducedAvailableTableAdapter.Fill(this.magazynioDataSet.ProductsSaledProducedAvailable);
             // TODO: This line of code loads data into the 'magazynioDataSet1.Salesman' table. You can move, or remove it, as needed.
             this.salesmanTableAdapter.Fill(this.magazynioDataSet1.Salesman);
             // TODO: This line of code loads data into the 'magazynioDataSet.Sale' table. You can move, or remove it, as needed.
@@ -286,7 +288,7 @@ namespace jpmobapp
 
                 foreach (var sale in sales) 
                 {
-                //    this.saleTableAdapter.Insert(sale.Product.Id, sale.Salesman.Id, sale.Date, sale.Quantity);
+                    this.saleTableAdapter.Insert(sale.Product.WarehouseId, sale.Salesman.Id, sale.Date, sale.Quantity);
                     context.Sales.Remove(sale);
                 }
 
@@ -299,7 +301,7 @@ namespace jpmobapp
                 }
                 context.SaveChanges();
 
-                foreach (var product in this.productTableAdapter.GetData())
+                foreach (var product in this.productsSaledProducedAvailableTableAdapter.GetData())
                 {
                     Debug.WriteLine(product.ToString());
                     var localProduct = new Product
@@ -307,13 +309,28 @@ namespace jpmobapp
                         Name = product.Name,
                         Price = product.Price,
                         Description = product.Description,
-                        AvailableQuantity = 100,
+                        AvailableQuantity = product.QAvailable,
                         WarehouseId = product.Id
                     };
                     context.Products.Add(localProduct);
                 }
                 context.SaveChanges();
 
+                var salesmans = from salseman in context.SalesTeam select salseman;
+ 
+                foreach (var salesman in salesmans) 
+                {
+                    context.SalesTeam.Remove(salesman);
+                }
+                context.SaveChanges();
+
+                //foreach (var salesman in this.salesmanTableAdapter.GetData())
+                //{
+                //    var localSalesman = new Salesman
+                //    {
+                //        Name = salesman.Name
+                //    };
+                //}
             }
             RefreshSales();
             RefreshProducts();
